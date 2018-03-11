@@ -21,7 +21,7 @@ public class StocksDbHelper extends SQLiteOpenHelper{
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(StockContract.StockEntry.CREATE_TABLE_STOCK);
+        db.execSQL(StockContract.StockEntry.CREATE_TABLE_QUERY);
     }
 
     @Override
@@ -29,15 +29,14 @@ public class StocksDbHelper extends SQLiteOpenHelper{
 
     }
 
-    public void insertItem(StockItem item) {
+    public void insertItem(StockProvider item) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(StockContract.StockEntry.COLUMN_NAME, item.getProductName());
-        values.put(StockContract.StockEntry.COLUMN_PRICE, item.getPrice());
-        values.put(StockContract.StockEntry.COLUMN_QUANTITY, item.getQuantity());
+        values.put(StockContract.StockEntry.COLUMN_PRICE, item.getProductPrice());
+        values.put(StockContract.StockEntry.COLUMN_QUANTITY, item.getProductQuantity());
         values.put(StockContract.StockEntry.COLUMN_SUPPLIER_NAME, item.getSupplierName());
         values.put(StockContract.StockEntry.COLUMN_SUPPLIER_PHONE, item.getSupplierPhone());
-        values.put(StockContract.StockEntry.COLUMN_SUPPLIER_EMAIL, item.getSupplierEmail());
         values.put(StockContract.StockEntry.COLUMN_IMAGE, item.getImage());
         long id = db.insert(StockContract.StockEntry.TABLE_NAME, null, values);
     }
@@ -51,7 +50,6 @@ public class StocksDbHelper extends SQLiteOpenHelper{
                 StockContract.StockEntry.COLUMN_QUANTITY,
                 StockContract.StockEntry.COLUMN_SUPPLIER_NAME,
                 StockContract.StockEntry.COLUMN_SUPPLIER_PHONE,
-                StockContract.StockEntry.COLUMN_SUPPLIER_EMAIL,
                 StockContract.StockEntry.COLUMN_IMAGE
         };
         Cursor cursor = db.query(
@@ -75,7 +73,6 @@ public class StocksDbHelper extends SQLiteOpenHelper{
                 StockContract.StockEntry.COLUMN_QUANTITY,
                 StockContract.StockEntry.COLUMN_SUPPLIER_NAME,
                 StockContract.StockEntry.COLUMN_SUPPLIER_PHONE,
-                StockContract.StockEntry.COLUMN_SUPPLIER_EMAIL,
                 StockContract.StockEntry.COLUMN_IMAGE
         };
         String selection = StockContract.StockEntry._ID + "=?";
