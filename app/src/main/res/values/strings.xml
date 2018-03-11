@@ -13,4 +13,15 @@
     <string name="place_more_order">Place more order</string>
     <string name="dummy_data">Insert dummy data</string>
     <string name="add_product">Add new product to list</string>
+    <string name="add_new_item">Add new item to list</string>
+    <string name="edit_item">Edit Items</string>
+    <string name="place_order">Place order for this item through call</string>
+    <string name="phone">Phone</string>
+    <string name="unsaved_prompt">There are unsaved changes in the product information. Do you want to continue?</string>
+    <string name="discard">Discard</string>
+    <string name="continue_editing">Continue Editing</string>
+    <string name="askToDelete">Do you want to delete the item?</string>
+    <string name="ok">Ok</string>
+    <string name="cancel">Cancel</string>
+    <string name="product_missing">Missing product</string>
 </resources>
