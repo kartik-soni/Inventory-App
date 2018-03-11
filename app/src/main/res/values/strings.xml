@@ -1,4 +1,15 @@
 <resources>
     <string name="app_name">Inventory App</string>
-    <string name="empty_list">Start adding something to an empty box.</string>
+    <string name="name">Product Name</string>
+    <string name="price">Price</string>
+    <string name="quantity">quantity</string>
+    <string name="supplier">Supplier</string>
+    <string name="supplier_eg">24*7 Super Market</string>
+    <string name="supplier_phone">Supplier Phone</string>
+    <string name="supplier_phone_eg">+91-1234567890</string>
+    <string name="image">Image</string>
+    <string name="browse_image">Browse Image</string>
+    <string name="submit">Submit</string>
+    <string name="place_more_order">Place more order</string>
+    <string name="dummy_data">dummy_data</string>
 </resources>

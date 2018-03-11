@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".DetailsActivity">
+
+    <item
+        android:id="@+id/action_save"
+        android:icon="@drawable/ic_check"
+        app:showAsAction="always"
+        android:title="@string/submit" />
+
+    <item
+        android:id="@+id/action_order"
+        android:title="@string/place_more_order"/>
+
+    <item
+        android:id="@+id/action_delete_item"
+        android:title="Delete this itenm"/>
+
+    <item
+        android:id="@+id/action_delete_all_data"
+        android:title="Delete whole list"/>
+
+</menu>
