@@ -9,7 +9,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 
+import com.example.kartik.inventoryapp.data.StocksDbHelper;
+
 public class MainActivity extends AppCompatActivity {
+    StocksDbHelper dbHelper;
+    StockAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,5 +47,16 @@ public class MainActivity extends AppCompatActivity {
                 adapter.swapCursor(dbHelper.readStock());*/
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void clickListItem(long id) {
+        Intent intent = new Intent(this, EditorsActivity.class);
+        intent.putExtra("itemId", id);
+        startActivity(intent);
+    }
+
+    public void clickCart(long id, int quantity) {
+        dbHelper.sellOneItem(id, quantity);
+        adapter.swapCursor(dbHelper.readStock());
     }
 }
