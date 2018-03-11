@@ -23,6 +23,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.kartik.inventoryapp.data.StockContract;
 import com.example.kartik.inventoryapp.data.StockProvider;
@@ -201,6 +202,7 @@ public class EditorsActivity extends AppCompatActivity {
         if (actualUri == null && itemIdFlag == 0) {
             check = false;
             imageBrowse.setError("Missing image");
+            Toast.makeText(this, "All fields are mandatory", Toast.LENGTH_SHORT).show();
         }
         if (!check) {
             return false;
@@ -345,6 +347,7 @@ public class EditorsActivity extends AppCompatActivity {
     private boolean setValue(EditText text, String description) {
         if (TextUtils.isEmpty(text.getText())) {
             text.setError(getString(R.string.product_missing) + description);
+            Toast.makeText(this, "All fields are mandatory", Toast.LENGTH_SHORT).show();
             return false;
         } else {
             text.setError(null);
@@ -362,7 +365,6 @@ public class EditorsActivity extends AppCompatActivity {
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        // User clicked "Discard" button, close the current activity.
                         finish();
                     }
                 };
