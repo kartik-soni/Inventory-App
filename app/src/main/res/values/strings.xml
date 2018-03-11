@@ -2,7 +2,7 @@
     <string name="app_name">Inventory App</string>
     <string name="name">Product Name</string>
     <string name="price">Price</string>
-    <string name="quantity">quantity</string>
+    <string name="quantity">Quantity</string>
     <string name="supplier">Supplier</string>
     <string name="supplier_eg">24*7 Super Market</string>
     <string name="supplier_phone">Supplier Phone</string>
@@ -12,4 +12,5 @@
     <string name="submit">Submit</string>
     <string name="place_more_order">Place more order</string>
     <string name="dummy_data">dummy_data</string>
+    <string name="add_product">Add new product to list</string>
 </resources>
