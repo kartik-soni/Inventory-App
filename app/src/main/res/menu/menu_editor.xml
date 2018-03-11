@@ -17,10 +17,10 @@
 
     <item
         android:id="@+id/delete_item"
-        android:title="Delete this itenm"/>
+        android:title="@string/delete_this_item"/>
 
     <item
         android:id="@+id/delete_all_data"
-        android:title="Delete whole list"/>
+        android:title="@string/delete_whole_list"/>
 
 </menu>

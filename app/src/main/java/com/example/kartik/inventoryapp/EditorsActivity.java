@@ -115,12 +115,14 @@ public class EditorsActivity extends AppCompatActivity {
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         super.onPrepareOptionsMenu(menu);
+        if(currentItemId==0) {
             MenuItem deleteOneItemMenuItem = menu.findItem(R.id.delete_item);
             MenuItem deleteAllMenuItem = menu.findItem(R.id.delete_all_data);
             MenuItem orderMenuItem = menu.findItem(R.id.order);
             deleteOneItemMenuItem.setVisible(false);
             deleteAllMenuItem.setVisible(false);
             orderMenuItem.setVisible(false);
+        }
         return true;
     }
 
