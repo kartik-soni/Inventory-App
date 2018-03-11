@@ -1,6 +1,7 @@
 package com.example.kartik.inventoryapp;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -174,34 +175,34 @@ public class EditorsActivity extends AppCompatActivity {
         supplierPhone.setText(cursor.getString(cursor.getColumnIndex(StockContract.StockEntry.COLUMN_SUPPLIER_PHONE)));
         imageView.setImageURI(Uri.parse(cursor.getString(cursor.getColumnIndex(StockContract.StockEntry.COLUMN_IMAGE))));
         productName.setEnabled(false);
-        productQuantity.setEnabled(false);
+        productPrice.setEnabled(false);
         supplierName.setEnabled(false);
         supplierPhone.setEnabled(false);
         imageBrowse.setEnabled(false);
     }
 
     private boolean saveData() {
-        boolean isAllOk = true;
+        boolean check = true;
         if (!setValue(productName, "name")) {
-            isAllOk = false;
+            check = false;
         }
         if (!setValue(productPrice, "price")) {
-            isAllOk = false;
+            check = false;
         }
         if (!setValue(productQuantity, "quantity")) {
-            isAllOk = false;
+            check = false;
         }
         if (!setValue(supplierName, "supplier name")) {
-            isAllOk = false;
+            check = false;
         }
         if (!setValue(supplierPhone, "supplier phone")) {
-            isAllOk = false;
+            check = false;
         }
         if (actualUri == null && currentItemId == 0) {
-            isAllOk = false;
+            check = false;
             imageBrowse.setError("Missing image");
         }
-        if (!isAllOk) {
+        if (!check) {
             return false;
         }
 
@@ -351,4 +352,47 @@ public class EditorsActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        if (!infoItemHasChanged) {
+            super.onBackPressed();
+            return;
+        }
+        DialogInterface.OnClickListener discardButtonClickListener =
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        // User clicked "Discard" button, close the current activity.
+                        finish();
+                    }
+                };
+
+        unsavedDialoguePrompt(discardButtonClickListener);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case PERMISSIONS_EXTERNAL_STORAGE: {
+
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    openImageSelector();
+                }
+            }
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent resultData) {
+
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK) {
+
+            if (resultData != null) {
+                actualUri = resultData.getData();
+                imageView.setImageURI(actualUri);
+                imageView.invalidate();
+            }
+        }
+    }
 }
