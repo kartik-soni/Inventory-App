@@ -11,6 +11,6 @@
     <string name="browse_image">Browse Image</string>
     <string name="submit">Submit</string>
     <string name="place_more_order">Place more order</string>
-    <string name="dummy_data">dummy_data</string>
+    <string name="dummy_data">Insert dummy data</string>
     <string name="add_product">Add new product to list</string>
 </resources>
