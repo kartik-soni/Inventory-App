@@ -26,4 +26,5 @@
     <string name="product_missing">Missing product</string>
     <string name="delete_this_item">Delete this item</string>
     <string name="delete_whole_list">Delete whole list</string>
+    <string name="empty_cart">Add some items to your list.</string>
 </resources>
