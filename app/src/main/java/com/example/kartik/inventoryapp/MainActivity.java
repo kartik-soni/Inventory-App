@@ -17,7 +17,7 @@ import com.example.kartik.inventoryapp.data.StocksDbHelper;
 public class MainActivity extends AppCompatActivity {
     StocksDbHelper dbHelper;
     StockAdapter stockAdapter;
-    int scrollFlag=0;
+    int scrollFlag = 0;
 
 
     @Override
@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         listView.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
-                if(scrollState == 0) return;
+                if (scrollState == 0) return;
                 final int currentVisibleItem = view.getFirstVisiblePosition();
                 if (currentVisibleItem > scrollFlag) {
                     fab.show();
@@ -64,8 +64,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu){
-        getMenuInflater().inflate(R.menu.menu_main,menu);
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 

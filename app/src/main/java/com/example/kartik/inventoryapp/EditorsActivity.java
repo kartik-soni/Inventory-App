@@ -39,17 +39,17 @@ public class EditorsActivity extends AppCompatActivity {
     EditText productQuantity;
     EditText supplierName;
     EditText supplierPhone;
-    long currentItemId;
+    long itemIdFlag;
     ImageButton decreaseProductQuantity;
     ImageButton increaseProductQuantity;
     Button imageBrowse;
     ImageView imageView;
     Uri actualUri;
-    private static final String LOG_TAG = EditorsActivity.class.getCanonicalName();
     private static final int PERMISSIONS_EXTERNAL_STORAGE = 1;
     private StocksDbHelper dbHelper;
-    private static final int PICK_IMAGE_REQUEST = 0;
-    Boolean infoItemHasChanged = false;
+    private static final int IMAGE_REQUEST = 0;
+    Boolean changeInData = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,31 +59,30 @@ public class EditorsActivity extends AppCompatActivity {
         }
 
         productName = findViewById(R.id.product_name_edit);
-
         productPrice = findViewById(R.id.price_edit);
         productQuantity = findViewById(R.id.quantity_edit);
         supplierName = findViewById(R.id.supplier_name_edit);
-        supplierPhone =  findViewById(R.id.supplier_phone_edit);
+        supplierPhone = findViewById(R.id.supplier_phone_edit);
         decreaseProductQuantity = findViewById(R.id.decrease_quantity);
         increaseProductQuantity = findViewById(R.id.increase_quantity);
         imageBrowse = findViewById(R.id.select_image);
         imageView = findViewById(R.id.image_view);
 
         dbHelper = new StocksDbHelper(this);
-        currentItemId = getIntent().getLongExtra("itemId", 0);
+        itemIdFlag = getIntent().getLongExtra("itemId", 0);
 
-        if (currentItemId == 0) {
+        if (itemIdFlag == 0) {
             setTitle(getString(R.string.add_new_item));
         } else {
             setTitle(getString(R.string.edit_item));
-            EditItem(currentItemId);
+            EditItem(itemIdFlag);
         }
 
         decreaseProductQuantity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 decrementInQuantity();
-                infoItemHasChanged = true;
+                changeInData = true;
             }
         });
 
@@ -91,7 +90,7 @@ public class EditorsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 incrementInQuantity();
-                infoItemHasChanged = true;
+                changeInData = true;
             }
         });
 
@@ -99,11 +98,10 @@ public class EditorsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 BrowseImage();
-                infoItemHasChanged = true;
+                changeInData = true;
             }
         });
     }
-
 
 
     @Override
@@ -115,7 +113,7 @@ public class EditorsActivity extends AppCompatActivity {
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         super.onPrepareOptionsMenu(menu);
-        if(currentItemId==0) {
+        if (itemIdFlag == 0) {
             MenuItem deleteOneItemMenuItem = menu.findItem(R.id.delete_item);
             MenuItem deleteAllMenuItem = menu.findItem(R.id.delete_all_data);
             MenuItem orderMenuItem = menu.findItem(R.id.order);
@@ -136,7 +134,7 @@ public class EditorsActivity extends AppCompatActivity {
                 finish();
                 return true;
             case android.R.id.home:
-                if (!infoItemHasChanged) {
+                if (!changeInData) {
                     NavUtils.navigateUpFromSameTask(this);
                     return true;
                 }
@@ -157,7 +155,7 @@ public class EditorsActivity extends AppCompatActivity {
                 return true;
             case R.id.delete_item:
                 // delete one item
-                deleteDialoguePrompt(currentItemId);
+                deleteDialoguePrompt(itemIdFlag);
                 return true;
             case R.id.delete_all_data:
                 //delete all data
@@ -200,7 +198,7 @@ public class EditorsActivity extends AppCompatActivity {
         if (!setValue(supplierPhone, "supplier phone")) {
             check = false;
         }
-        if (actualUri == null && currentItemId == 0) {
+        if (actualUri == null && itemIdFlag == 0) {
             check = false;
             imageBrowse.setError("Missing image");
         }
@@ -208,7 +206,7 @@ public class EditorsActivity extends AppCompatActivity {
             return false;
         }
 
-        if (currentItemId == 0) {
+        if (itemIdFlag == 0) {
             StockProvider item = new StockProvider(
                     productName.getText().toString().trim(),
                     productPrice.getText().toString().trim(),
@@ -219,7 +217,7 @@ public class EditorsActivity extends AppCompatActivity {
             dbHelper.insertItem(item);
         } else {
             int quantity = Integer.parseInt(productQuantity.getText().toString().trim());
-            dbHelper.updateItem(currentItemId, quantity);
+            dbHelper.updateItem(itemIdFlag, quantity);
         }
         return true;
     }
@@ -272,7 +270,7 @@ public class EditorsActivity extends AppCompatActivity {
             intent.addCategory(Intent.CATEGORY_OPENABLE);
         }
         intent.setType("image/*");
-        startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"), IMAGE_REQUEST);
     }
 
     private void OrderConfirmationDialog() {
@@ -338,7 +336,7 @@ public class EditorsActivity extends AppCompatActivity {
     private int deleteOneItem(long itemId) {
         SQLiteDatabase database = dbHelper.getWritableDatabase();
         String selection = StockContract.StockEntry._ID + "=?";
-        String[] selectionArgs = { String.valueOf(itemId) };
+        String[] selectionArgs = {String.valueOf(itemId)};
         int rowsDeleted = database.delete(
                 StockContract.StockEntry.TABLE_NAME, selection, selectionArgs);
         return rowsDeleted;
@@ -356,7 +354,7 @@ public class EditorsActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if (!infoItemHasChanged) {
+        if (!changeInData) {
             super.onBackPressed();
             return;
         }
@@ -373,7 +371,7 @@ public class EditorsActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode,String permissions[], int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
         switch (requestCode) {
             case PERMISSIONS_EXTERNAL_STORAGE: {
 
@@ -388,7 +386,7 @@ public class EditorsActivity extends AppCompatActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent resultData) {
 
-        if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK) {
+        if (requestCode == IMAGE_REQUEST && resultCode == Activity.RESULT_OK) {
 
             if (resultData != null) {
                 actualUri = resultData.getData();

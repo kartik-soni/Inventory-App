@@ -44,16 +44,5 @@ public class StockProvider {
     public String getImage() {
         return mImage;
     }
-   /* @Override
-    public String toString() {
-        return "StockProvider{" +
-                "productName='" + productName + '\'' +
-                ", price='" + price + '\'' +
-                ", quantity=" + quantity +
-                ", supplierName='" + supplierName + '\'' +
-                ", supplierPhone='" + supplierPhone + '\'' +
-                ", supplierEmail='" + supplierEmail + '\'' +
-                '}';
-    }*/
 
 }

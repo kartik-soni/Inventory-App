@@ -60,7 +60,7 @@ public class StockAdapter extends CursorAdapter {
         sale.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                activity.clickCart(id,quantity);
+                activity.clickCart(id, quantity);
             }
         });
     }

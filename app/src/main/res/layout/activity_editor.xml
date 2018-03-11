@@ -19,7 +19,7 @@
             style="@style/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text = "@string/name" />
+            android:text="@string/name" />
 
         <EditText
             android:id="@+id/product_name_edit"

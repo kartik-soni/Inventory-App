@@ -10,10 +10,9 @@ import android.database.sqlite.SQLiteOpenHelper;
  * Created by KARTIK on 3/11/2018.
  */
 
-public class StocksDbHelper extends SQLiteOpenHelper{
+public class StocksDbHelper extends SQLiteOpenHelper {
     public final static String DB_NAME = "stocks.db";
     public final static int DB_VERSION = 1;
-    public final static String LOG_TAG = StocksDbHelper.class.getCanonicalName();
 
     public StocksDbHelper(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
@@ -76,7 +75,7 @@ public class StocksDbHelper extends SQLiteOpenHelper{
                 StockContract.StockEntry.COLUMN_IMAGE
         };
         String selection = StockContract.StockEntry._ID + "=?";
-        String[] selectionArgs = new String[] { String.valueOf(itemId) };
+        String[] selectionArgs = new String[]{String.valueOf(itemId)};
 
         Cursor cursor = db.query(
                 StockContract.StockEntry.TABLE_NAME,
@@ -95,7 +94,7 @@ public class StocksDbHelper extends SQLiteOpenHelper{
         ContentValues values = new ContentValues();
         values.put(StockContract.StockEntry.COLUMN_QUANTITY, quantity);
         String selection = StockContract.StockEntry._ID + "=?";
-        String[] selectionArgs = new String[] { String.valueOf(currentItemId) };
+        String[] selectionArgs = new String[]{String.valueOf(currentItemId)};
         db.update(StockContract.StockEntry.TABLE_NAME,
                 values, selection, selectionArgs);
     }
@@ -104,12 +103,12 @@ public class StocksDbHelper extends SQLiteOpenHelper{
         SQLiteDatabase db = getWritableDatabase();
         int newQuantity = 0;
         if (quantity > 0) {
-            newQuantity = quantity -1;
+            newQuantity = quantity - 1;
         }
         ContentValues values = new ContentValues();
         values.put(StockContract.StockEntry.COLUMN_QUANTITY, newQuantity);
         String selection = StockContract.StockEntry._ID + "=?";
-        String[] selectionArgs = new String[] { String.valueOf(itemId) };
+        String[] selectionArgs = new String[]{String.valueOf(itemId)};
         db.update(StockContract.StockEntry.TABLE_NAME,
                 values, selection, selectionArgs);
     }
