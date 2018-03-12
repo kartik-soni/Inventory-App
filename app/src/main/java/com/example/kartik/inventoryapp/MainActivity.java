@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
         StockProvider peanutButter = new StockProvider(
                 "Peanut Butter",
                 "Rs.140",
-                50,
+                111,
                 "Pintola Foods Co.",
                 "+91 5123456789",
                 "android.resource://com.example.kartik.inventoryapp/drawable/peanut_butter");
