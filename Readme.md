@@ -28,7 +28,7 @@
 ![](https://github.com/kartik-soni/Inventory-App/blob/master/app/Screenshot6.PNG)
 ![](https://github.com/kartik-soni/Inventory-App/blob/master/app/Screenshot7.PNG)
 
-#MIT License
+# MIT License
 
 Copyright (c) 2018 KARTIK SONI
 
