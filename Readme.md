@@ -19,5 +19,11 @@
 - Delete one or all of your items
 - Includes a demo content (tap the cloud download icon in the action bar)
 
-# Screenshot
-![](https://github.com/kartik-soni/Inventory-App/blob/master/app/src/main/res/drawable/peanut_butter.png)
+# Screenshots
+![](https://github.com/kartik-soni/Inventory-App/blob/master/app/Screenshot1.PNG)
+![](https://github.com/kartik-soni/Inventory-App/blob/master/app/Screenshot2.PNG)
+![](https://github.com/kartik-soni/Inventory-App/blob/master/app/Screenshot3.PNG)
+![](https://github.com/kartik-soni/Inventory-App/blob/master/app/Screenshot4.PNG)
+![](https://github.com/kartik-soni/Inventory-App/blob/master/app/Screenshot5.PNG)
+![](https://github.com/kartik-soni/Inventory-App/blob/master/app/Screenshot6.PNG)
+![](https://github.com/kartik-soni/Inventory-App/blob/master/app/Screenshot7.PNG)
